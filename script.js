@@ -1,6 +1,12 @@
 // accessing the elements
 let boxes = document.querySelectorAll(".box");
 let resetBtn = document.querySelector('#reset');
+let newGameBtn = document.querySelector('#new-game');
+let msgContainer = document.querySelector(".msg-container");
+let msg = document.querySelector('#msg');
+
+
+
 // Now we have alternate turn 0 and X
 let turn0 = true;
 
@@ -32,6 +38,22 @@ boxes.forEach((box)=>{
         checkWinner();
      })
 });
+
+
+const resetGame = ()=>{
+    turn0 = true;
+
+}
+const disableBoxes = ()=>{
+    for(let box of boxes){
+        box.disabled = true;
+    }
+}
+const showWinner = (winner)=>{
+    msg.innerText = `Congratulations, winner is ${winner}`;
+    msgContainer.classList.remove("hide");
+    disableBoxes(); 
+}
 const checkWinner = ()=>{
     for(let pattern of winPattern){
         // console.log(
@@ -45,7 +67,8 @@ const checkWinner = ()=>{
           let pos3Val =  boxes[pattern[2]].innerText;// position 3 value
           if(pos1Val != "" && pos2Val != "" && pos3Val != ""){
             if(pos1Val === pos2Val && pos2Val === pos3Val){
-                console.log("winner");
+                console.log("winner", pos1Val);
+                showWinner(pos1Val);
             }
           }
     }
