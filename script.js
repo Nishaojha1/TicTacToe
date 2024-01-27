@@ -1,0 +1,33 @@
+// accessing the elements
+let boxes = document.querySelectorAll(".box");
+let resetBtn = document.querySelector('#reset');
+// Now we have alternate turn 0 and X
+let turn0 = true;
+
+// Storing all the winning patterns
+const winPattern = [
+    [0,1,2],
+    [0,3,6],
+    [0,4,8],
+    [1,4,7],
+    [2,5,8],
+    [2,4,6],
+    [3,4,5],
+    [6,7,8],
+];
+// Action will happen on clicking the boxes so we will add an eventListener for each boxes
+boxes.forEach((box)=>{
+     box.addEventListener("click",()=>{
+        // console.log("box was clicked");
+        // we want either X or 0 depends on the turn
+        if(turn0===true) {//player 0
+        box.innerText = "0";
+        turn0 = false;
+        }
+        else{
+            box.innerText = "X";
+            turn0 = true;
+        }
+        box.disabled = true;
+     })
+})
