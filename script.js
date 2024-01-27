@@ -29,5 +29,24 @@ boxes.forEach((box)=>{
             turn0 = true;
         }
         box.disabled = true;
+        checkWinner();
      })
-})
+});
+const checkWinner = ()=>{
+    for(let pattern of winPattern){
+        // console.log(
+        //     pattern[0], 
+        //     pattern[1], 
+        //     pattern[2],
+        //     );
+        
+          let pos1Val =  boxes[pattern[0]].innerText; //position 1 value
+          let pos2Val =  boxes[pattern[1]].innerText; //position 2 value
+          let pos3Val =  boxes[pattern[2]].innerText;// position 3 value
+          if(pos1Val != "" && pos2Val != "" && pos3Val != ""){
+            if(pos1Val === pos2Val && pos2Val === pos3Val){
+                console.log("winner");
+            }
+          }
+    }
+}
