@@ -55,7 +55,13 @@ body{
 
 }
 .msg-container{
-    height: 30vmin;
+    height: 100vmin;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
 }
 .hide{
     display: none;

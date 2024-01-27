@@ -40,36 +40,52 @@ boxes.forEach((box)=>{
 });
 
 
-const resetGame = ()=>{
-    turn0 = true;
+const resetGame = () => {
+    turnO = true;
+    count = 0;
+    enableBoxes();
+    msgContainer.classList.add("hide");
+  };
+  
+    
 
-}
 const disableBoxes = ()=>{
     for(let box of boxes){
         box.disabled = true;
     }
 }
+    const enableBoxes = ()=>{
+        for(let box of boxes){
+            box.disabled = false;
+            box.innerText = "";
+        }
+}
 const showWinner = (winner)=>{
     msg.innerText = `Congratulations, winner is ${winner}`;
     msgContainer.classList.remove("hide");
     disableBoxes(); 
+
+    const gameDraw = () => {
+        msg.innerText = `Game was a Draw.`;
+        msgContainer.classList.remove("hide");
+        disableBoxes();
+      };
+      
 }
-const checkWinner = ()=>{
-    for(let pattern of winPattern){
-        // console.log(
-        //     pattern[0], 
-        //     pattern[1], 
-        //     pattern[2],
-        //     );
-        
-          let pos1Val =  boxes[pattern[0]].innerText; //position 1 value
-          let pos2Val =  boxes[pattern[1]].innerText; //position 2 value
-          let pos3Val =  boxes[pattern[2]].innerText;// position 3 value
-          if(pos1Val != "" && pos2Val != "" && pos3Val != ""){
-            if(pos1Val === pos2Val && pos2Val === pos3Val){
-                console.log("winner", pos1Val);
-                showWinner(pos1Val);
-            }
-          }
+const checkWinner = () => {
+  for (let pattern of winPattern) {
+    let pos1Val = boxes[pattern[0]].innerText;
+    let pos2Val = boxes[pattern[1]].innerText;
+    let pos3Val = boxes[pattern[2]].innerText;
+
+    if (pos1Val != "" && pos2Val != "" && pos3Val != "") {
+      if (pos1Val === pos2Val && pos2Val === pos3Val) {
+        showWinner(pos1Val);
+        return true;
+      }
     }
-}
+  }
+};
+
+newGameBtn.addEventListener("click", resetGame);
+resetBtn.addEventListener("click", resetGame);
